@@ -1,4 +1,5 @@
 import { Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -6,9 +7,9 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div>
-            <span className="font-heading text-xl font-bold text-background">
+            <Link to="/" className="font-heading text-xl font-bold text-background">
               Vargas & Sons Roof Repair
-            </span>
+            </Link>
             <div className="mt-2 flex items-center gap-2 text-sm">
               <MapPin className="h-4 w-4" />
               Serving Spring, TX & Surrounding Areas
@@ -24,9 +25,9 @@ const Footer = () => {
               (936) 259-5222
             </a>
             <nav className="flex gap-6 text-sm">
-              <a href="#" className="transition-colors hover:text-background">Home</a>
-              <a href="#" className="transition-colors hover:text-background">Roof Repairs</a>
-              <a href="#" className="transition-colors hover:text-background">Request Quote</a>
+              <Link to="/" className="transition-colors hover:text-background">Home</Link>
+              <Link to="/roofing-list" className="transition-colors hover:text-background">Roof Repairs</Link>
+              <Link to="/contact-us" className="transition-colors hover:text-background">Request Quote</Link>
             </nav>
           </div>
         </div>
