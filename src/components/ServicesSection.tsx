@@ -23,6 +23,7 @@ import {
   Sparkles,
   Fan,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const services = [
   { icon: Zap, title: "Emergency Hail Damage Repair", desc: "Addressing roof impairments caused by hail." },
@@ -52,34 +53,106 @@ const services = [
 ];
 
 const ServicesSection = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
   return (
     <section id="services" className="section-padding bg-background">
       <div className="container mx-auto">
-        <div className="mb-12 text-center md:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-12 text-center md:mb-16"
+        >
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-accent">
             What We Do
           </span>
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
+          >
             Our Roofing Services for Spring
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mx-auto mt-4 max-w-2xl text-muted-foreground"
+          >
             From emergency repairs to full replacements, we handle every roofing need with expertise and care.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {services.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="service-card group">
-              <div className="mb-3 inline-flex rounded-lg bg-accent/10 p-2.5 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        >
+          {services.map(({ icon: Icon, title, desc }, index) => (
+            <motion.div
+              key={title}
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.02,
+                y: -5,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              whileTap={{
+                scale: 0.98,
+                transition: { duration: 0.1 }
+              }}
+              className="service-card group cursor-pointer"
+            >
+              <motion.div
+                className="mb-3 inline-flex rounded-lg bg-accent/10 p-2.5 text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-accent-foreground"
+                whileHover={{ rotate: [0, -10, 10, 0] }}
+                transition={{ duration: 0.5 }}
+              >
                 <Icon className="h-5 w-5" />
-              </div>
+              </motion.div>
               <h3 className="mb-1.5 font-heading text-base font-bold text-foreground">
                 {title}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">{desc}</p>
-            </div>
+
+              {/* Mobile tap indicator */}
+              <motion.div
+                className="mt-3 flex items-center justify-center opacity-0 group-hover:opacity-100 md:hidden"
+                initial={{ scale: 0 }}
+                whileHover={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className="rounded-full bg-accent/20 px-2 py-1 text-xs text-accent">
+                  Tap to learn more
+                </div>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

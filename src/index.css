@@ -96,18 +96,33 @@
 
 @layer components {
   .btn-cta {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-8 py-4 text-lg font-bold text-accent-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-8 py-4 text-lg font-bold text-accent-foreground transition-all duration-300 hover:scale-105 active:scale-95;
   }
 
   .btn-outline-hero {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary-foreground px-8 py-4 text-lg font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-foreground hover:text-primary;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary-foreground px-8 py-4 text-lg font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-foreground hover:text-primary active:scale-95;
   }
 
   .service-card {
-    @apply rounded-xl bg-card p-6 shadow-sm border border-border transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+    @apply rounded-xl bg-card p-6 shadow-sm border border-border transition-all duration-300 hover:shadow-md hover:-translate-y-1 active:scale-[0.98];
   }
 
   .section-padding {
     @apply px-4 py-16 md:px-8 lg:px-16 lg:py-24;
+  }
+
+  /* Mobile improvements */
+  @media (max-width: 768px) {
+    .btn-cta, .btn-outline-hero {
+      @apply w-full max-w-xs;
+    }
+
+    .service-card {
+      @apply p-4;
+    }
+
+    .section-padding {
+      @apply py-12;
+    }
   }
 }
